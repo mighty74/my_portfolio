@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="background"></div>
+            <h1 style="text-align: center; font-size: 8vw; color: #131313;">HORI's Portfolio</h1>
+        </div>
+        <h1 style="text-align: center; color: #666;">Profile</h1>
+        <div class="header-dev">
+            <img src="{{ url_for('static', filename='uploads/mytop.jpg') }}" alt="Profile Image" style="display: block; margin: 0 auto; width: 30vw; height: auto;">
+            <h1>{{ profile.introduction | safe }}</h1>
+        </div>
+    </header>
+
+    <section>
+        <h2>Experience</h2>
+        <ul>
+            {% for exp in profile.experience %}
+                <li><strong>{{ exp.year }}:</strong> {{ exp.description }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Skills</h2>
+        <ul class="skills-container">
+            {% for skill in profile.skills %}
+                <div class="skill">
+                    <img src="{{ url_for('static', filename=skill.image_url.split('static/')[-1]) }}" alt="{{ skill.name }}" class="skill-image">
+                    <div class="skill-details">
+                        <strong class="skill-name">{{ skill.name }}</strong>
+                        <div class="skill-level">
+                            Level: {{ skill.level }} ->
+                            {% for level in range(1, 6) %}
+                                <div class="{% if level <= skill.level %}level-{{ level }}{% endif %}"></div>
+                            {% endfor %}
+                        </div>
+                        <div class="skill-description">{{ skill.description }}</div>
+                    </div>
+                </div>
+            {% endfor %}    
+        </ul>
+    </section>
+
+    <section>
+        <h2>Projects</h2>
+        <ul>
+            {% for project in profile.projects %}
+                <li><strong>{{ project.name | safe }}:</strong> {{ project.description | safe }} <a href="{{ project.link }}">{{ project.link_text }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <footer>
+        <a href="{{ url_for('login') }}">Admin Login</a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Edit</title>
+    <script>
+        function addExperience() {
+            const container = document.getElementById('experience-container');
+            const index = container.children.length;
+            const experienceHTML = `
+                <div>
+                    <input type="text" name="year" placeholder="Year" required>
+                    <input type="text" name="description" placeholder="Description" required>
+                    <button type="button" onclick="removeElement(this)">Remove</button>
+                </div>`;
+            container.insertAdjacentHTML('beforeend', experienceHTML);
+        }
+        function addSkill() {
+            const container = document.getElementById('skill-container');
+            const skillHTML = `
+                <div>
+                    <input type="text" name="skill_name" placeholder="Skill Name" required>
+                    <input type="text" name="skill_description" placeholder="Skill Description" required>
+                    <input type="file" name="skill_image">
+                    <label for="skill_level">Level:</label>
+                    <select name="skill_level" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <button type="button" onclick="removeElement(this)">Remove</button>
+                </div>`;
+            container.insertAdjacentHTML('beforeend', skillHTML);
+        }  
+
+        function addProject() {
+            const container = document.getElementById('project-container');
+            const index = container.children.length;
+            const projectHTML = `
+                <div>
+                    <input type="text" name="proj_name" placeholder="Project Name" required>
+                    <input type="text" name="proj_desc" placeholder="Project Description" required>
+                    <input type="url" name="proj_link" placeholder="Project Link" required>
+                    <input type="text" name="proj_link_text" placeholder="Link Text" required>
+                    <button type="button" onclick="removeElement(this)">Remove</button>
+                </div>`;
+            container.insertAdjacentHTML('beforeend', projectHTML);
+        }
+
+        function removeElement(button) {
+            button.parentElement.remove();
+        }
+    </script>
+</head>
+<body>
+    <h1>Edit Profile</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <h2>Introduction</h2>
+        <textarea name="introduction" required>{{ profile.introduction }}</textarea>
+
+        <h2>Experience</h2>
+        <div id="experience-container">
+            {% for exp in profile.experience %}
+            <div>
+                <input type="text" name="year" placeholder="Year" value="{{ exp.year }}" required>
+                <input type="text" name="description" placeholder="Description" value="{{ exp.description }}" required>
+                <button type="button" onclick="removeElement(this)">Remove</button>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addExperience()">Add Experience</button>
+
+        <h2>Skills</h2>
+        <div id="skill-container">
+            {% for skill in profile.skills %}
+                <div>
+                    <input type="text" name="skill_name" placeholder="Skill Name" value="{{ skill.name }}" required>
+                    <input type="text" name="skill_description" placeholder="Skill Description" value="{{ skill.description }}" required>
+                    
+                    <!-- 既存の画像を表示 -->
+                    {% if skill.image_url %}
+                        <img src="{{ url_for('static', filename=skill.image_url.split('static/')[-1]) }}" alt="{{ skill.name }}" class="skill-image" width="50">
+                        <input type="hidden" name="existing_skill_image" value="{{ skill.image_url }}">
+                    {% endif %}
+                    
+                    <!-- 新しい画像アップロードフィールド -->
+                    <input type="file" name="skill_image">
+                    <label for="level">Level:</label>
+                    <select name="skill_level" required>
+                        <option value="1" {% if skill.level == 1 %}selected{% endif %}>1</option>
+                        <option value="2" {% if skill.level == 2 %}selected{% endif %}>2</option>
+                        <option value="3" {% if skill.level == 3 %}selected{% endif %}>3</option>
+                        <option value="4" {% if skill.level == 4 %}selected{% endif %}>4</option>
+                        <option value="5" {% if skill.level == 5 %}selected{% endif %}>5</option>
+                    </select>
+                    <button type="button" onclick="removeElement(this)">Remove</button>
+                </div>
+                {% endfor %}
+        </div>
+        <button type="button" onclick="addSkill()">Add Skill</button>
+
+
+
+        <h2>Projects</h2>
+        <div id="project-container">
+            {% for proj in profile.projects %}
+            <div>
+                <input type="text" name="proj_name" placeholder="Project Name" value="{{ proj.name }}" required>
+                <input type="text" name="proj_desc" placeholder="Project Description" value="{{ proj.description }}" required>
+                <input type="url" name="proj_link" placeholder="Project Link" value="{{ proj.link }}" required>
+                <!-- リンクテキストを追加 -->
+                <input type="text" name="proj_link_text" placeholder="Link Text" value="{{ proj.link_text }}" required>
+                <button type="button" onclick="removeElement(this)">Remove</button>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addProject()">Add Project</button>
+
+        <br><br>
+        <input type="submit" value="Save Changes">
+    </form>
+</body>
+</html>

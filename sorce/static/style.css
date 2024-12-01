@@ -1,0 +1,164 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+header img {
+    display: block; /* ブロック要素として表示 */
+    margin: 0 auto; /* 自動で左右のマージンを設定 */
+    width: 150px; /* 画像の幅を設定 */
+    height: auto; /* 高さは自動調整 */
+    border-radius: 50%; /* 画像を円形に */
+    object-fit: cover; /* 中央部分にフォーカスして切り取り */
+    border: 0.2vw solid #333; /* 縁取りの色と太さ */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* 影を追加して立体感を出す */
+}
+
+section, footer {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.header-top {
+    position: relative; /* 相対位置を設定 */
+    padding: 20px 0; /* 上下のパディング */
+    text-align: center; /* 中央揃え */
+    color: white; /* デフォルトのテキスト色 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 影を追加 */
+    width: 100% -10px; /* 幅を100%に */
+    height: 50vw; /* 高さをビューの幅の50%に */
+    margin: 10px; /* マージンを追加 */
+    display: flex; /* フレックスボックスを使用 */
+    align-items: center; /* 縦方向の中央揃え */
+    justify-content: center; /* 横方向の中央揃え */
+    text-shadow: 
+        -2px -2px 0 #fff,   /* 上左 */
+        2px -2px 0 #fff,    /* 上右 */
+        -2px 2px 0 #fff,    /* 下左 */
+        2px 2px 0 #fff,     /* 下右 */
+        -3px -3px 0 #2b2b28,   /* 上左 */
+        3px -3px 0 #2b2b28,    /* 上右 */
+        -3px 3px 0 #2b2b28,    /* 下左 */
+        3px 3px 0 #2b2b28;     /* 下右 */  
+    margin-bottom: 10vw;
+}
+
+.background {
+    position: absolute; /* 絶対位置を設定 */
+    top: 0; /* 上端に合わせる */
+    left: 0; /* 左端に合わせる */
+    right: 0; /* 右端に合わせる */
+    bottom: 0; /* 下端に合わせる */
+    background-image: url('/static/uploads/mememighty.png'); /* 背景画像のパス */
+    opacity: 0.3; /* 背景の透過率 */
+    background-size: cover; /* 背景画像を要素全体に拡大 */
+    background-position: center; /* 画像を中央に配置 */
+    background-repeat: no-repeat; /* 画像の繰り返しを無効に */
+    z-index: -1; /* 背景を後ろに配置 */
+}
+
+header {
+    color: #363636;
+}
+
+header h1 {
+    opacity: 1; /* テキストは不透明に */
+    font-size: 2.5em; /* テキストのサイズ */
+}
+
+
+
+.header-dev {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+
+section h2 {
+    color: #666;
+    font-size: 1.5em;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 8px 0;
+}
+
+footer a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;  /* 要素を横並びにし、幅いっぱいになったら改行 */
+    gap: 20px; /* スキル間のスペース */
+}
+
+.skill {
+    display: flex;
+    width: calc(50% - 20px); /* 3つ横並びにするための幅調整 */
+    max-width: 368px;
+    min-width: 300px;
+    border: 1px solid #ddd; /* スキルの境界線 */
+    padding: 10px;
+    border-radius: 5px; /* 角を丸くする */
+    align-items: center; /* 垂直方向に中央に配置 */
+
+}
+
+.skill-image {
+    width: 50px; /* 画像の幅 */
+    height: 50px; /* 画像の高さ */
+    margin-right: 10px; /* 画像とテキストの間にスペース */
+}
+
+.skill-details {
+    flex-grow: 1; /* 残りのスペースをテキストが占有する */
+}
+
+.skill-name {
+    font-size: 1.2em; /* 名前のフォントサイズ */
+}
+
+
+.skill-level {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em; /* レベルのフォントサイズ */
+}
+
+.skill-description {
+    font-size: 0.8em; /* 説明のフォントサイズ */
+    color: #777; /* 説明の色 */
+}
+
+.skill-level div {
+    width: 20px;  /* 各レベルの幅 */
+    height: 20px;  /* 各レベルの高さ */
+    margin-right: 5px;  /* 各レベルの間隔 */
+    border: 1px solid #ccc;  /* 枠線 */
+}
+
+.level-1 { background-color: #ffcccc; }
+.level-2 { background-color: #ff9999; }
+.level-3 { background-color: #ff6666; }
+.level-4 { background-color: #ff3333; }
+.level-5 { background-color: #ff0000; }
